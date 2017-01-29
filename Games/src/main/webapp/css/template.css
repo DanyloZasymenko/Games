@@ -1,0 +1,14 @@
+body {
+	background-color: wheat;
+}
+.error {
+	height: 30px;
+	width: 300px;
+	background: inherit;
+	text-alight: center;
+	position: absolute;
+	margin: auto;
+	left: 50%;
+	margin-left: -150px;
+	color: red;
+}
