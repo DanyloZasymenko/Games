@@ -47,36 +47,19 @@
 	<br>
 	<a href="registration">registration</a>
 	<br>
+	<br>
+	Login to buy game
 
 </security:authorize>
 
 <br>
 <br>
-<security:authorize access="hasRole('ROLE_USER')">
-	<c:forEach var="offer" items="${offerDTOs}">
-		<div class="offersHome">
-			${offer.name} ${offer.price} <a href="toBasket/${offer.id}">to
-				basket</a> <br>
-		</div>
-	</c:forEach>
-</security:authorize>
-<br>
-<br>
-<security:authorize access="!isAuthenticated()">
-	<c:forEach var="offer" items="${offerDTOs}">
-		<div class="offersHome">
-			${offer.name} ${offer.price} <a href="toBasket/${offer.id}">to
-				basket</a> <br>
-		</div>
-	</c:forEach>
-</security:authorize>
-<br>
-<br>
-<security:authorize access="hasRole('ROLE_ADMIN')">
-	<c:forEach var="offer" items="${offerDTOs}">
-		<div class="offersHome">
-			${offer.name} ${offer.price} <a href="toBasket/${offer.id}">to
-				basket</a> <br>
-		</div>
-	</c:forEach>
-</security:authorize>
+<c:forEach var="offer" items="${offerDTOs}">
+	<div class="offersHome">
+		${offer.name} ${offer.price}
+		<security:authorize access="isAuthenticated()">
+			<a href="toBasket/${offer.id}">to basket</a>
+		</security:authorize>
+		<br>
+	</div>
+</c:forEach>
