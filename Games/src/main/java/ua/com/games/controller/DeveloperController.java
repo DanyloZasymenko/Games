@@ -25,11 +25,15 @@ public class DeveloperController {
 	@RequestMapping(value = "/newDeveloper", method = RequestMethod.GET)
 	private String newDeveloper(Model model) {
 
+		addModels(model);
+
+		return "views-admin-newDeveloper";
+	}
+
+	private void addModels(Model model) {
 		model.addAttribute("developerDTOs", DtoUtilMapper.developersToDevelopersDTO(developerService.findAll()));
 		
 		model.addAttribute("developerDTO", new DeveloperDTO());
-
-		return "views-admin-newDeveloper";
 	}
 
 	@RequestMapping(value = "/saveDeveloper", method = RequestMethod.POST)
@@ -44,6 +48,8 @@ public class DeveloperController {
 					|| e.getMessage().equals(AdminValidationMessages.DEVELOPER_ALREADY_EXIST)) {
 				model.addAttribute("developerException", e.getMessage());
 			}
+			
+			addModels(model);
 			return "views-admin-newDeveloper";
 		}
 

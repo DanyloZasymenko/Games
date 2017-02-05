@@ -24,11 +24,15 @@ public class GenreController {
 	@RequestMapping(value = "/newGenre", method = RequestMethod.GET)
 	private String newGenre(Model model) {
 
+		addModels(model);
+
+		return "views-admin-newGenre";
+	}
+
+	private void addModels(Model model) {
 		model.addAttribute("genreDTOs", DtoUtilMapper.genresToGenresDTO(genreService.findAll()));
 		
 		model.addAttribute("genreDTO", new GenreDTO());
-
-		return "views-admin-newGenre";
 	}
 
 	@RequestMapping(value = "/saveGenre", method = RequestMethod.POST)
@@ -43,6 +47,7 @@ public class GenreController {
 					|| e.getMessage().equals(AdminValidationMessages.GENRE_ALREADY_EXIST)) {
 				model.addAttribute("genreException", e.getMessage());
 			}
+			addModels(model);
 			return "views-admin-newGenre";
 		}
 

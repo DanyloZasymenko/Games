@@ -30,10 +30,14 @@ public class OfferController {
 
 		// model.addAttribute("gamesFromOffer",
 		// offerService.findGamesFromOffer(id));
-		model.addAttribute("gameDTOs", DtoUtilMapper.gamesToGamesDTO(gameService.findAll()));
-		model.addAttribute("offerDTOs", DtoUtilMapper.offersToOffersDTO(offerService.findAll()));
+		addModels(model);
 
 		return "views-admin-newOffer";
+	}
+
+	private void addModels(Model model) {
+		model.addAttribute("gameDTOs", DtoUtilMapper.gamesToGamesDTO(gameService.findAll()));
+		model.addAttribute("offerDTOs", DtoUtilMapper.offersToOffersDTO(offerService.findAll()));
 	}
 
 	@RequestMapping(value = "/deleteOffer/{id}", method = RequestMethod.GET)
@@ -46,17 +50,20 @@ public class OfferController {
 	public String saveOffer(@ModelAttribute OfferDTO offerDTO, @RequestParam String[] gameIds, Model model) {
 
 		Offer offer = DtoUtilMapper.offerDTOToOffer(offerDTO);
-		
-		offerService.addGamesToOffer(offer, gameIds);
 
 		try {
+			offerService.addGamesToOffer(offer, gameIds);
 			offerService.save(offer);
 		} catch (Exception e) {
-			if (e.getMessage().equals(AdminValidationMessages.EMPTY_OFFER_FIELD)) {
-				model.addAttribute("offerException", e.getMessage());
-			} else if (e.getMessage().equals(AdminValidationMessages.WRONG_PRICE)) {
-				model.addAttribute("priceException", e.getMessage());
-			}
+			/*
+			 * if
+			 * (e.getMessage().equals(AdminValidationMessages.EMPTY_OFFER_FIELD)
+			 * ) { model.addAttribute("offerException", e.getMessage()); } else
+			 * if (e.getMessage().equals(AdminValidationMessages.WRONG_PRICE)) {
+			 * model.addAttribute("priceException", e.getMessage()); }
+			 */
+			model.addAttribute("Exception", e.getMessage());
+			addModels(model);
 			return "views-admin-newOffer";
 		}
 

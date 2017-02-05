@@ -26,7 +26,11 @@ public class OfferSeviceImpl implements OfferService{
 	
 	@Autowired
 	@Qualifier("offerValidator")
-	private Validator validator;
+	private Validator<Offer> validator;
+	
+	@Autowired
+	@Qualifier("selectValidator")
+	private Validator<String> selectValidator;
 	
 	@Override
 	public void save(Offer offer) throws Exception {
@@ -53,7 +57,9 @@ public class OfferSeviceImpl implements OfferService{
 
 	@Override
 	@Transactional
-	public void addGamesToOffer(Offer offer, String[] gameIds) {
+	public void addGamesToOffer(Offer offer, String[] gameIds) throws Exception {
+		
+		selectValidator.validate(gameIds[0]);
 		
 		List<Game> games = new ArrayList<>();
 		

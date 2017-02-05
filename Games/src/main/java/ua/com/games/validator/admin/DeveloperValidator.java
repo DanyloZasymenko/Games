@@ -9,13 +9,13 @@ import ua.com.games.validator.main.ValidationException;
 import ua.com.games.validator.main.Validator;
 
 @Component("developerValidator")
-public class DeveloperValidator implements Validator{
+public class DeveloperValidator implements Validator<Developer>{
 	
 	@Autowired
 	private DeveloperDao developerDao;
 
 	@Override
-	public void validate(Object object) throws Exception {
+	public void validate(Developer object) throws Exception {
 		
 		Developer developer = (Developer) object;
 		
@@ -28,5 +28,5 @@ public class DeveloperValidator implements Validator{
 		}
 				
 	}
-
+	
 }

@@ -11,6 +11,6 @@ public interface GameService {
 	Game findOne(int id);
 	void delete(int id);
 	
-	void addDeveloperToGame(Game game, String developerId);
-	void addGenresToGame(Game game, String [] genreIds);
+	void addDeveloperToGame(Game game, String developerId) throws Exception;
+	void addGenresToGame(Game game, String [] genreIds) throws Exception;
 }

@@ -9,13 +9,13 @@ import ua.com.games.validator.main.ValidationException;
 import ua.com.games.validator.main.Validator;
 
 @Component("clientValidator")
-public class ClientValidator implements Validator{
+public class ClientValidator implements Validator<Client>{
 
 	@Autowired
 	private ClientDao clientDao;
 	
 	@Override
-	public void validate(Object object) throws Exception {
+	public void validate(Client object) throws Exception {
 		Client client = (Client) object;
 		
 		if(client.getName().isEmpty()){

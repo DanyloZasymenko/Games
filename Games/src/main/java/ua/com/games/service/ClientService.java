@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ua.com.games.dto.GameDTO;
 import ua.com.games.entity.Client;
 import ua.com.games.entity.Game;
 

@@ -23,23 +23,20 @@
 
 <form:form action="saveOffer" modelAttribute="offerDTO" method="post">
 
-	<select name="gameIds" multiple="multiple">
+	<div style="text-align: center; color: red; margin: 5px">
+		${Exception}</div>
+
+	<select name="gameIds" multiple="multiple" required="required">
+		<option selected value="noGames">---Select Game---</option>
 		<c:forEach var="game" items="${gameDTOs}">
 			<option value="${game.id}">${game.name}</option>
 		</c:forEach>
 	</select>
 
-	<div style="text-align: center; color: red; margin: 5px">
-		<label for="Name">${offerException}</label>
-	</div>
+	<input required="required" name="name" type="text"
+		placeholder="input name here" />
 
-	<input name="name" type="text" placeholder="input name here" />
-
-	<div style="text-align: center; color: red; margin: 5px">
-		<label for="Name">${priceException}</label>
-	</div>
-
-	<input name="price" placeholder="input price here" />
+	<input required="required" name="price" placeholder="input price here" />
 
 	<button>Save Offer</button>
 

@@ -52,7 +52,7 @@ public class ClientServiceImpl implements ClientService, UserDetailsService {
 
 	@Autowired
 	@Qualifier("clientValidator")
-	private Validator validator;
+	private Validator<Client> validator;
 
 	public void save(Client client) throws Exception {
 

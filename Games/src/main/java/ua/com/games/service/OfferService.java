@@ -2,7 +2,6 @@ package ua.com.games.service;
 
 import java.util.List;
 
-import ua.com.games.entity.Game;
 import ua.com.games.entity.Offer;
 
 public interface OfferService {
@@ -12,7 +11,7 @@ public interface OfferService {
 	Offer findOne(int id);
 	void delete(int id);
 	
-	void addGamesToOffer(Offer offer, String [] gameIds);
+	void addGamesToOffer(Offer offer, String [] gameIds) throws Exception;
 	
 //	List<Game> findGamesFromOffer(int id);
 }

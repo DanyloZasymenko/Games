@@ -21,37 +21,58 @@
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
 
-	<div style="text-align: center; color: red; margin: 5px">
-		<label for="Name">${gameException}</label>
+	<div style="text-align: center; color: red; margin: 5px" id="exception">
+		${Exception}
 	</div>
 
 
-	<input name="name" type="text" placeholder="insert name here">
+	<input name="name" type="text"
+		placeholder="insert name here" id="nameInput" onchange="check()" >
 
-	<div style="text-align: center; color: red; margin: 5px">
-		<label for="Name">${yearException}</label>
-	</div>
-
-	<input name="year" type="number" placeholder="insert year here">
+	<input name="year" required="required" type="number"
+		placeholder="insert year here">
 
 	<select name="developerId">
+		<option selected value="noDeveloper">---Select Developer---</option>
 		<c:forEach var="developer" items="${developerDTOs}">
 
-			
 			<option value="${developer.id}">${developer.name}</option>
 
 		</c:forEach>
 	</select>
 
-	<select name="genreIds" multiple="multiple">
+	<select name="genreIds" multiple="multiple" required="required">
+		<option selected value="noGenres">---Select Genres---</option>
 		<c:forEach var="genre" items="${genreDTOs}">
-			
+
 			<option value="${genre.id}">${genre.name}</option>
 		</c:forEach>
 	</select>
 
-	<button>save Game</button>
+	<button id="save" onmouseover="check()">save Game</button>
 </form:form>
+
+<script type="text/javascript">
+
+
+function check() {
+
+
+    if(document.getElementById('nameInput').value == ''){
+	
+		document.getElementById('save').disabled='disabled';
+	
+		$('#exception').text('EMPTY_GAME_FIELD');
+    }else{
+	
+		document.getElementById('save').disabled='';
+		
+		$('#exception').text('');
+		}
+	}
+
+
+</script>
 
 <br>
 <br>

@@ -2,7 +2,6 @@ package ua.com.games.service;
 
 import java.util.List;
 
-import ua.com.games.entity.Game;
 import ua.com.games.entity.Orders;
 
 public interface OrdersService {

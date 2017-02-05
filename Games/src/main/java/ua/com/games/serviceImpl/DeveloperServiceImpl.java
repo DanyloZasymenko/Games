@@ -25,7 +25,7 @@ public class DeveloperServiceImpl implements DeveloperService{
 	
 	@Autowired
 	@Qualifier("developerValidator")
-	private Validator validator;
+	private Validator<Developer> validator;
 	
 	public void save(Developer developer) throws Exception {
 		

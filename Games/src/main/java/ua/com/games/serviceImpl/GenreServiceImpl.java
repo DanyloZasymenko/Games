@@ -19,7 +19,7 @@ public class GenreServiceImpl implements GenreService{
 	
 	@Autowired
 	@Qualifier("genreValidator")
-	private Validator validator;
+	private Validator<Genre> validator;
 	
 	public void save(Genre genre) throws Exception {
 		

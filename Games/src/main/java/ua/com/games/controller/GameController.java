@@ -35,10 +35,7 @@ public class GameController {
 	@RequestMapping(value = "/newGame", method = RequestMethod.GET)
 	private String newGame(Model model) {
 
-		model.addAttribute("gameDTOs", DtoUtilMapper.gamesToGamesDTO(gameService.findAll()));
-		model.addAttribute("gameDTO", new GameDTO());
-		model.addAttribute("developerDTOs", DtoUtilMapper.developersToDevelopersDTO(developerService.findAll()));
-		model.addAttribute("genreDTOs", DtoUtilMapper.genresToGenresDTO(genreService.findAll()));
+		addModels(model);
 
 		return "views-admin-newGame";
 	}
@@ -57,25 +54,37 @@ public class GameController {
 			@RequestParam String[] genreIds, Model model) {
 
 		Game game = DtoUtilMapper.gameDTOToGame(gameDTO);
-		
-		gameService.addDeveloperToGame(game, developerId);
-
-		gameService.addGenresToGame(game, genreIds);
-
+	
 		try {
+			gameService.addDeveloperToGame(game, developerId);
+			gameService.addGenresToGame(game, genreIds);
 			gameService.save(game);
 		} catch (Exception e) {
-			if (e.getMessage().equals(AdminValidationMessages.EMPTY_GAME_FIELD)
+			/*if (e.getMessage().equals(AdminValidationMessages.EMPTY_GAME_FIELD)
 					|| e.getMessage().equals(AdminValidationMessages.GAME_ALREADY_EXIST)) {
-				model.addAttribute("gameException", e.getMessage());
+				model.addAttribute("Exception", e.getMessage());
 			} else if (e.getMessage().equals(AdminValidationMessages.EMPTY_YEAR_FIELD)
 					|| e.getMessage().equals(AdminValidationMessages.WRONG_YEAR)) {
-				model.addAttribute("yearException", e.getMessage());
-			}
+				model.addAttribute("Exception", e.getMessage());
+			} else if (e.getMessage().equals(AdminValidationMessages.CHOOSE_DEVELOPER)) {
+				model.addAttribute("Exception", e.getMessage());
+			}*/
+			
+			model.addAttribute("Exception", e.getMessage());
+			addModels(model);
+
 			return "views-admin-newGame";
+			
 		}
 
 		return "redirect:/newGame";
+	}
+
+	private void addModels(Model model) {
+		model.addAttribute("gameDTOs", DtoUtilMapper.gamesToGamesDTO(gameService.findAll()));
+		model.addAttribute("gameDTO", new GameDTO());
+		model.addAttribute("developerDTOs", DtoUtilMapper.developersToDevelopersDTO(developerService.findAll()));
+		model.addAttribute("genreDTOs", DtoUtilMapper.genresToGenresDTO(genreService.findAll()));
 	}
 
 }

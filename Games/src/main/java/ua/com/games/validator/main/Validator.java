@@ -1,7 +1,7 @@
 package ua.com.games.validator.main;
 
-public interface Validator {
+public interface Validator <T>{
 
-	void validate(Object object) throws Exception;
+	void validate(T object) throws Exception;
 	
 }

@@ -10,13 +10,13 @@ import ua.com.games.entity.Genre;
 import ua.com.games.validator.main.Validator;
 
 @Component("genreValidator")
-public class GenreValidator implements Validator{
+public class GenreValidator implements Validator<Genre>{
 
 	@Autowired
 	private GenreDao genreDao;
 	
 	@Override
-	public void validate(Object object) throws Exception {
+	public void validate(Genre object) throws Exception {
 		
 		Genre genre = (Genre) object;
 		

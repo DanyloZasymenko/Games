@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ua.com.games.dao.OrdersDao;
-import ua.com.games.entity.Game;
 import ua.com.games.entity.Orders;
 import ua.com.games.service.OrdersService;
 

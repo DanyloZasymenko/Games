@@ -31,7 +31,11 @@ public class GameServiceImpl implements GameService{
 	
 	@Autowired
 	@Qualifier("gameValidator")
-	private Validator validator;
+	private Validator<Game> validator;
+	
+	@Autowired
+	@Qualifier("selectValidator")
+	private Validator<String> selectValidator;
 	
 	public void save(Game game) throws Exception {
 		
@@ -51,20 +55,24 @@ public class GameServiceImpl implements GameService{
 	public void delete(int id) {
 		gameDao.delete(id);
 	}
-
+	
 	@Override
 	@Transactional
-	public void addDeveloperToGame(Game game, String developerId) {
-			
+	public void addDeveloperToGame(Game game, String developerId) throws Exception {
+		
+			selectValidator.validate(developerId);
+		
 			Developer developer = developerDao.findOne(Integer.parseInt(developerId));
 			
 			game.setDeveloper(developer);
 		
 	}
-
+	
 	@Override
 	@Transactional
-	public void addGenresToGame(Game game, String[] genreIds) {
+	public void addGenresToGame(Game game, String[] genreIds) throws Exception {
+		
+		selectValidator.validate(genreIds[0]);
 		
 		List<Genre> genres = new ArrayList<>();
 		
