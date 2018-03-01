@@ -15,7 +15,7 @@ import ua.com.games.service.MailSenderService;
 public class MailSenderServiceImpl implements MailSenderService{
 
 	private static final String USERNAME = "danik1492@gmail.com";
-	private static final String PASSWORD = "nastusia";
+	private static final String PASSWORD = "************";
 	
 	@Override
 	@Async
